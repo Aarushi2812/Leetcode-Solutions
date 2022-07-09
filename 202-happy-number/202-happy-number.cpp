@@ -11,15 +11,12 @@ public:
                return sum;
         }
     bool isHappy(int n) {
-            if(n==1111111){
-                    return true;
-            }
-      
+                
             long long int x=n;
            
             while(true) {
                    x=sum(x);
-                   if(x<=9 and x>=0) {
+                   if(x<=9 and x>=0 and x!=7) {
                            break;
                    }
                     }
