@@ -11,26 +11,23 @@
 **/ 
 class Solution {
 public:
-    int good(TreeNode* root,vector<int> path){
+    int good(TreeNode* root,int max){
             if(root==NULL){
                     return 0;
             }
-            int c=1;
-            for(int i=0;i<path.size();i++){
-            if(root->val < path[i]){
-               c=0;
-                    break;
+            int c=0;
+            if(root->val>=max){
+                    max=root->val;
+                    c=1;
             }
-            }
-            path.push_back(root->val);
-            int left=good(root->left,path);
-            int right=good(root->right,path);
+            int left=good(root->left,max);
+            int right=good(root->right,max);
             
             return c+left+right;
             
     }
     int goodNodes(TreeNode* root) {
             vector<int> path;
-        return good(root,path);
+        return good(root,root->val);
     }
 };
