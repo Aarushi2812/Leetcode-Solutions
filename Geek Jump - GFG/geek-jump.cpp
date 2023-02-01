@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution {
+  public:
+    // int mineng(vector<int> height, int n){
+    //     if(n < 0){
+    //         return 0;
+    //     }
+    //     int one = 0 , two = 0;
+    //     if(n-1 >=0)
+    //     one =abs(height[n]-height[n-1]) + mineng( height , n-1 );
+    //     if(n-1 >=0)
+    //     two =abs(height[n]-height[n-2]) + mineng( height , n-2 );
+        
+    //     return min( one, two);
+    // }
+    int minimumEnergy(vector<int>& height, int n) {
+        // Code here
+        if(n==1){
+            return 0;
+        }
+        if(n==2){
+            return abs(height[0]-height[1]);
+        }
+        int dp[n];
+        dp[0] = 0;
+        dp[1] = abs(height[0]-height[1]);
+        for(int i=2; i<n ;i++){
+            dp[i] = min(abs(height[i]-height[i-1])+dp[i-1] ,abs(height[i]-height[i-2])+dp[i-2] );
+        }
+        return dp[n-1];
+        //return mineng(height,n-1);
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        cin >> N;
+        vector<int> arr(N);
+        for (int i = 0; i < N; i++) {
+            cin >> arr[i];
+        }
+        Solution obj;
+        cout << obj.minimumEnergy(arr, N) << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
